@@ -1,5 +1,7 @@
 import math
 import random
+import matplotlib.pyplot as plt
+
 
 def diengs_algorithm(password: str, num_buckets: int) -> int:
     # Convert the password to a integer using the ord() function
