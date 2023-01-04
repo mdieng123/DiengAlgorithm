@@ -1,7 +1,7 @@
 import math
 import random
 import matplotlib.pyplot as plt
-
+import string
 
 def diengs_algorithm(password: str, num_buckets: int) -> int:
     # Convert the password to a integer using the ord() function
@@ -14,7 +14,7 @@ def diengs_algorithm(password: str, num_buckets: int) -> int:
     password_int *= random_int
     
     # Calculate the hash value using the fractional part of the password integer raised to the power of 1/3
-    hash_val = math.fract(password_int ** (1/3))
+    hash_val = math.fmod(password_int,(1/3))
     
     # Use the math theorem to further obscure the hash value
     hash_val = (hash_val + random_int) % num_buckets
@@ -26,7 +26,7 @@ def diengs_algorithm(password: str, num_buckets: int) -> int:
     # Return the integer part of the hash value
     return int(hash_val)
     
-    def visualize_hash_distribution(num_buckets: int, num_samples: int):
+def visualize_hash_distribution(num_buckets: int, num_samples: int):
     # Generate a list of random passwords
     passwords = [''.join(random.choices(string.ascii_letters + string.digits, k=8)) for _ in range(num_samples)]
     
@@ -39,5 +39,8 @@ def diengs_algorithm(password: str, num_buckets: int) -> int:
     plt.ylabel('Frequency')
     plt.title('Distribution of Hash Values')
     plt.show()
+
+visualize_hash_distribution(10, 100)
+
 
 #converts the password to an integer, multiplies it by a random integer, and calculates the hash value using the fractional part of the password integer raised to the power of 1/3. However, it also includes the math theorem (a + b) % p = ((a % p) + (b % p)) % p, using the random integer as b in the equation. This helps to further obscure the original password and make the hash value more difficult to reverse.
